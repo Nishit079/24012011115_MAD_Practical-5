@@ -1,0 +1,78 @@
+--- a/app/src/main/java/com/example/a24012011115_mad_jetpackcompose/MainActivity.kt
++++ b/app/src/main/java/com/example/a24012011115_mad_jetpackcompose/MainActivity.kt
+@@ -4,8 +4,17 @@
+ import androidx.activity.ComponentActivity
+ import androidx.activity.compose.setContent
+ import androidx.activity.enableEdgeToEdge
++import androidx.compose.foundation.layout.Arrangement
++import androidx.compose.foundation.layout.Column
+ import androidx.compose.foundation.layout.fillMaxSize
+ import androidx.compose.foundation.layout.padding
++import androidx.compose.material3.Button
+ import androidx.compose.material3.Scaffold
+ import androidx.compose.material3.Text
+ import androidx.compose.runtime.Composable
++import androidx.compose.runtime.getValue
++import androidx.compose.runtime.mutableStateOf
++import androidx.compose.runtime.remember
++import androidx.compose.runtime.setValue
++import androidx.compose.ui.Alignment
+ import androidx.compose.ui.Modifier
+ import androidx.compose.ui.tooling.preview.Preview
++import androidx.compose.ui.unit.dp
++import androidx.compose.ui.unit.sp
+ import com.example.a24012011115_mad_jetpackcompose.ui.theme._24012011115_MAD_JetpackComposeTheme
+
+ class MainActivity : ComponentActivity() {
+@@ -14,9 +23,9 @@
+         enableEdgeToEdge()
+         setContent {
+             _24012011115_MAD_JetpackComposeTheme {
+                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+-                    Greeting(
+-                        name = "Android",
++                    CounterButtonDemo(
+                         modifier = Modifier.padding(innerPadding)
+                     )
+                 }
+             }
+@@ -25,16 +34,27 @@
+ }
+
+ @Composable
+-fun Greeting(name: String, modifier: Modifier = Modifier) {
+-    Text(
+-        text = "Hello $name!",
+-        modifier = modifier
+-    )
++fun CounterButtonDemo(modifier: Modifier = Modifier) {
++    var count by remember { mutableStateOf(1) }
++
++    Column(
++        modifier = modifier.fillMaxSize(),
++        verticalArrangement = Arrangement.Center,
++        horizontalAlignment = Alignment.CenterHorizontally
++    ) {
++        Text(
++            text = "Count: $count",
++            fontSize = 28.sp,
++            modifier = Modifier.padding(bottom = 24.dp)
++        )
++        Button(onClick = { count++ }) {
++            Text(
++                text = "Click to Count ($count)",
++                fontSize = 18.sp
++            )
++        }
++    }
+ }
+
+ @Preview(showBackground = true)
+ @Composable
+-fun GreetingPreview() {
++fun CounterButtonDemoPreview() {
+     _24012011115_MAD_JetpackComposeTheme {
+-        Greeting("Android")
++        CounterButtonDemo()
+     }
+ }
